@@ -265,6 +265,15 @@ To propose a Genetic Programming (GP) composition approach that simultaneously c
  \centerline{\includegraphics[width=6cm]{tree.pdf}}
 \end{frame}
 
+\note{
+	\begin{itemize}
+	\item Web service compositions can be intuitively represented as directed acyclic graphs, as shown by the first structure. We can see that parallel and sequential configurations are encoded by the edges, and conditional constraints by special nodes.
+	\item However, a tree representation is required for GP. Therefore, in our approach parallel, sequential, and conditional configurations are all represented as non-terminal nodes of the tree, while candidate atomic services are the terminal nodes.
+	\item The tree structure shown here is equivalent to the composition shown in graph form.
+	\end{itemize}
+}
+
+%------------------------------------------------
 
 \begin{frame}
 \frametitle{Population Initialisation}
@@ -272,7 +281,7 @@ An algorithm is used to create a candidate in graph format, and then translate i
 
 \vfill
 
-\begin{columns}
+\begin{columns}[c]
 \column{7cm}
 \hspace{1cm}
 %\centerline{
@@ -323,12 +332,42 @@ An algorithm is used to create a candidate in graph format, and then translate i
 \end{columns}
 \end{frame}
 
+\note{
+	\begin{itemize}
+	\item In order to create candidates with correct input-output connections between services, we employ an initialisation algorithm that creates compositions in graph form and then translates them into tree form.
+	\item The basic idea of this algorithm is to build each part of the tree separately, and then assemble the parts into a candidate. Each part is built ensuring that the connections are correct. We begin by building the parts that go from the conditional node to the overall outputs ($T_1$ and $T_2$), and both possibilities are built. Then we move on to the part that leads to the condition from the overall inputs ($T_4$). These are connected to a sequence and a conditional node.
+	\item For simplicity, in this work we assume that each composition has only one conditional node, so its position is always the same in the tree.
+	\end{itemize}
+}
+
 %------------------------------------------------
 
 \begin{frame}
 \frametitle{Mutation and Crossover}
+\begin{columns}[c]
+\column{0.4\textwidth}
+\minipage[c][0.7\textheight][s]{\columnwidth}
+\textbf{Mutation:} Selects random node and replaces it with equivalent subtree.
+\vfill
+\centerline{\includegraphics[width=4cm]{algorithm_tree.pdf}}
+\endminipage
 
+\column{0.4\textwidth}
+\minipage[c][0.7\textheight][s]{\columnwidth}
+\textbf{Crossover:} Swaps any two equivalent terminal nodes.
+\vfill
+\centerline{\includegraphics[width=4cm]{algorithm_tree.pdf}}
+\endminipage
+\end{columns}
 \end{frame}
+
+\note{
+	\begin{itemize}
+		\item During the evolution process, the custom operators used are mutation and crossover. Both of these operators maintain the functional correctness of candidates, that is, they ensure that input-output connections still make sense.
+		\item The mutation operator randomly selects a node in the tree, removes that subtree and replaces it with a newly generated subtree. The new subtree may have a different structure than the old one, but it is functionally equivalent to it, i.e. produces the same output given the same input. New subtrees are generated using the initialisation algorithm.
+		\item The crossover operator finds any functionally equivalent terminal nodes in two candidate trees and swaps them. We chose this crossover operation because it models the process of Web service selection, where the best service is chosen among a group of functionally equivalent candidates.
+	\end{itemize}
+}
 
 %------------------------------------------------
 
