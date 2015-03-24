@@ -15,8 +15,13 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
-\documentclass{beamer}
+\documentclass[xcolor={table}]{beamer}
 %\documentclass[notes=only]{beamer} % Use this option to generate note slides
+
+\usepackage{algorithm2e}
+
+%\SetAlgoCaptionSeparator{.\space}
+%\renewcommand\AlCapFnt{\normalfont\scshape}
 
 \mode<presentation> {
 
@@ -156,6 +161,23 @@ The combination of Web services to achieve a more complex task. Fully automated 
 %------------------------------------------------
 
 \begin{frame}
+ \frametitle{A Composition Example with Branching}
+ \begin{columns}
+ \column{0.6\textwidth}
+ \centerline{\includegraphics[width=4.5cm]{motivation.pdf}}
+ 
+ \column{0.4\textwidth}
+ Certain compositions require alternative paths according to runtime values.
+ \bigskip
+ 
+ \textbf{Example:} Depending on balance, pay in full or pay in installments.
+ \end{columns}
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}
 \frametitle{Composition Dimensions}
 \begin{enumerate}
 \item \textbf{Functional correctness:} Service inputs and outputs must be properly linked (e.g. \textcolor{blue}{$FourDigitNumber \rightarrow ZipCode$}, but not \textcolor{blue}{$FourDigitNumber \rightarrow City$}).
@@ -222,9 +244,33 @@ Dimensions: \textit{Functional correctness, QoS.}
 \frametitle{Goal}
 To propose a Genetic Programming (GP) composition approach that simultaneously considers all dimensions.
 \vfill
+
+\begin{columns}[c]
+\column{0.3\textwidth}
+\begin{enumerate}
+ \item Trees preserve functional correctness.
+ \vfill
+ \item Conditions encoded in trees.
+ \vfill
+ \item Optimisation performed on QoS.
+\end{enumerate}
+
+\column{0.5\textwidth}
 \centerline{\includegraphics[width=6cm]{tree.pdf}}
+\end{columns}
 
 \end{frame}
+
+\note{
+\begin{itemize}
+ \item Given these limitations, the objective of the approach proposed in this paper is to address these three dimensions simultaneously by using genetic programming.
+ \item The functional correctness dimension is addressed by restricting the way in which services are linked to each other in each solution tree.
+ \item Conditional constraints are addressed by including a conditional nodes as possible nodes in the tree representation.
+ \item The Quality of Service dimension is addressed by using a fitness function that optimises solutions on quality attributes.
+ \item Let's understand these in more detail.
+\end{itemize}
+
+}
 
 %------------------------------------------------
 \section{GP Approach}
@@ -232,28 +278,156 @@ To propose a Genetic Programming (GP) composition approach that simultaneously c
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Table}
-\begin{table}
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\caption{Table caption}
-\end{table}
+ \frametitle{Candidate Representation}
+ \begin{columns}
+ \column{0.6\textwidth}
+ \centerline{\includegraphics[width=6.5cm]{representation.pdf}}
+ 
+ \column{0.4\textwidth}
+ \begin{itemize}
+  \item Tree equivalent to graph composition.
+  \medskip
+  \item  Parallel, sequential, and conditional represented as non-terminal nodes.
+  \medskip
+  \item Candidate services as terminal nodes.
+ \end{itemize}
+
+ \end{columns}
 \end{frame}
+
+\note{
+	\begin{itemize}
+	\item Web service compositions can be intuitively represented as directed acyclic graphs, as shown by the first structure. We can see that parallel and sequential configurations are encoded by the edges, and conditional constraints by special nodes.
+	\item However, a tree representation is required for GP. Therefore, in our approach parallel, sequential, and conditional configurations are all represented as non-terminal nodes of the tree, while candidate atomic services are the terminal nodes.
+	\item The tree structure shown here is equivalent to the composition shown in graph form.
+	\end{itemize}
+}
 
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Theorem}
-\begin{theorem}[Mass--energy equivalence]
-$E = mc^2$
-\end{theorem}
+\frametitle{Population Initialisation}
+An algorithm is used to create a candidate in graph format, and then translate it into a tree representation.
+
+\vfill
+
+\begin{columns}[c]
+\column{7cm}
+\hspace{1cm}
+%\centerline{
+\fbox{
+\scalebox{.40}{
+\begin{algorithm*}[H]
+ \setlength\hsize{0.9\linewidth}
+ \SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+ \SetKwFunction{createGraph}{createGraph}\SetKwFunction{toTree}{toTree}
+ \LinesNumbered
+ \SetNlSty{}{}{:}
+ \Input{$I$, $O_1$, $O_2$, $C$, $P$}
+ \Output{candidate tree $T$}
+ \eIf{$O_2 \neq \emptyset$}{
+  $G_1 \leftarrow \createGraph(I \cup C.if, O_1)$\;
+  $G_2 \leftarrow \createGraph(I \cup C.else, O_2)$\;
+  $T_1 \leftarrow \toTree(G_1.input)$\;
+  $T_2 \leftarrow \toTree(G_2.input)$\;
+  $T_3 \leftarrow$ new $ConditionalNode$($C$)\;
+  $T_3.leftChild \leftarrow T_1$\;
+  $T_3.rightChild \leftarrow T_2$\;
+  \eIf{$C \sqsubseteq I$}{
+    $T_3.prob \leftarrow P$\;
+    \KwRet $T_3$\;
+  }{
+    $G_4 \leftarrow \createGraph(I, C.else)$\;
+    $T_4 \leftarrow \toTree(G_4.input)$\;
+    $T_3.prob \leftarrow T_4.final.P$\;
+    $T \leftarrow$ new $SequenceNode$()\;
+    $T.leftChild \leftarrow T_4$\;
+    $T.rightChild \leftarrow T_3$\;
+    \KwRet $T$\;
+  }
+ }{
+  $G \leftarrow \createGraph(I, O_1)$\;
+  $T \leftarrow \toTree(G.input)$\;
+  \KwRet $T$\;
+ }
+% \vspace{2mm}
+% \caption{\footnotesize Generating a new candidate tree or a mutated subtree.}
+%\label{generation}
+\end{algorithm*}
+}}%}
+
+\column{4cm}
+\hspace{-2cm}
+\centerline{\includegraphics[width=4cm]{algorithm_tree.pdf}}
+\end{columns}
+\end{frame}
+
+\note{
+	\begin{itemize}
+	\item In order to create candidates with correct input-output connections between services, we employ an initialisation algorithm that creates compositions in graph form and then translates them into tree form.
+	\item The basic idea of this algorithm is to build each part of the tree separately, and then assemble the parts into a candidate. Each part is built ensuring that the connections are correct. We begin by building the parts that go from the conditional node to the overall outputs ($T_1$ and $T_2$), and both possibilities are built. Then we move on to the part that leads to the condition from the overall inputs ($T_4$). These are connected to a sequence and a conditional node.
+	\item For simplicity, in this work we assume that each composition has only one conditional node, so its position is always the same in the tree.
+	\end{itemize}
+}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Mutation and Crossover}
+\begin{columns}[c]
+\column{0.4\textwidth}
+\minipage[c][0.7\textheight][s]{\columnwidth}
+\textbf{Mutation:} Selects random node and replaces it with equivalent subtree.
+\vfill
+\centerline{\includegraphics[width=4cm]{mutation.pdf}}
+\endminipage
+
+\column{0.4\textwidth}
+\minipage[c][0.7\textheight][s]{\columnwidth}
+\textbf{Crossover:} Swaps any two equivalent terminal nodes.
+
+{
+\smallskipamount=0.5cm
+\smallskip
+}
+\centerline{\includegraphics[width=6cm]{crossover.pdf}}
+\endminipage
+\end{columns}
+\end{frame}
+
+\note{
+	\begin{itemize}
+		\item During the evolution process, the custom operators used are mutation and crossover. Both of these operators maintain the functional correctness of candidates, that is, they ensure that input-output connections still make sense.
+		\item The mutation operator randomly selects a node in the tree, removes that subtree and replaces it with a newly generated subtree. The new subtree may have a different structure than the old one, but it is functionally equivalent to it, i.e. produces the same output given the same input. New subtrees are generated using the initialisation algorithm.
+		\item The crossover operator finds any functionally equivalent terminal nodes in two candidate trees and swaps them. We chose this crossover operation because it models the process of Web service selection, where the best service is chosen among a group of functionally equivalent candidates.
+	\end{itemize}
+}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Fitness Function}
+Measures the overall quality of a composition candidate (minimising).
+
+\vfill
+
+\centerline{
+$fitness_i = w_1(1 - A_i) + w_2(1 - R_i) + w_3T_i + w_4C_i$
+}
+\bigskip
+
+\centerline{
+\noindent where $\sum_{i=1}^{4} w_i = 1$
+}
+
+
+\vfill
+\includegraphics[width=4cm]{sequence.pdf}
+\hfill
+\includegraphics[width=2.7cm]{parallel.pdf}
+\hfill
+\includegraphics[width=2.7cm]{conditional.pdf}
+
 \end{frame}
 
 %------------------------------------------------
@@ -261,36 +435,99 @@ $E = mc^2$
 \subsection{}
 %------------------------------------------------
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Verbatim}
-\begin{example}[Theorem Slide Code]
-\begin{verbatim}
 \begin{frame}
-\frametitle{Theorem}
-\begin{theorem}[Mass--energy equivalence]
-$E = mc^2$
-\end{theorem}
-\end{frame}\end{verbatim}
-\end{example}
+\frametitle{Experiments}
+\begin{itemize}
+ \item Lack of datasets supporting composition with branching.
+ \item Lack of comparable approaches that produce solutions with multiple output possibilities.
+\end{itemize}
+
+\setbeamercolor{postit}{fg=black,bg=orange!30}
+\begin{beamercolorbox}[sep=1em]{postit}
+\textbf{Decision:} Create datasets, execute for conditional compositions and also for each branch separately.
+\end{beamercolorbox}
+
+Parameters:
+\begin{table}
+\footnotesize
+\def\arraystretch{1.5}
+\begin{tabular}{|l|c|lcl}
+\cline{1-4}
+Independent runs      & 50  & \multicolumn{1}{l|}{Elitism candidates} & \multicolumn{1}{c|}{1}          &  \\ \cline{1-4}
+Population size       & 20  & \multicolumn{1}{l|}{Tournament size}    & \multicolumn{1}{c|}{7}          &  \\ \cline{1-4}
+Crossover probability & 0.9 & \multicolumn{1}{l|}{Fitness weights}    & \multicolumn{1}{c|}{0.25 (all)} &  \\ \cline{1-4}
+Mutation probability  & 0.1 &                                         & \multicolumn{1}{l}{}            &  \\ \cline{1-2}
+\end{tabular}
+\end{table}
+
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Figure}
-Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
-%\begin{figure}
-%\includegraphics[width=0.8\linewidth]{test}
-%\end{figure}
+\frametitle{Creation of Datasets}
+Modified from WSC2008.
+
+\begin{itemize}
+ \item Can be extended to contain QoS.
+ \item Provides ontology of input and output values.
+\end{itemize}
+
+\centerline{\includegraphics[width=9cm]{dataset_example.pdf}}
+
+\vfill
+
+Tasks requiring branching were created.
+
 \end{frame}
 
 %------------------------------------------------
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Citation}
-An example of the \verb|\cite| command to cite within the presentation:\\~
+\begin{frame}
+\frametitle{Results}
 
-This statement requires citation \cite{p1}.
+\begin{table}
+\fontsize{4}{5.332}\selectfont
+\centerline{
+\def\arraystretch{1.5}
+\begin{tabular}{c|c|c|}
+\cline{2-3}
+                                          & \multicolumn{2}{c|}{\textbf{Conditional}}      \\ \hline
+\multicolumn{1}{|c|}{\textbf{Set (size)}} & \textbf{Avg. fitness} & \textbf{Avg. time (s)} \\ \hline
+\multicolumn{1}{|c|}{1 (158)}                   & \cellcolor{blue!20} 0.601 $\pm$ 0.013      & \cellcolor{red!20} 1.290 $\pm$ 0.100    \\ \hline
+\multicolumn{1}{|c|}{2 (558)}                   & 0.712 $\pm$ 0.009                          & 2.829 $\pm$ 0.250                        \\ \hline
+\multicolumn{1}{|c|}{3 (604)}                   & 0.631 $\pm$ 0.008                          & 13.285 $\pm$ 1.229                       \\ \hline
+\multicolumn{1}{|c|}{4 (1041)}                   & 0.718 $\pm$ 0.048                          & 6.146 $\pm$ 0.574                        \\ \hline
+\multicolumn{1}{|c|}{5 (1090)}                   & 0.698 $\pm$ 0.005                          & 11.759 $\pm$ 0.948                       \\ \hline
+\multicolumn{1}{|c|}{6 (2198)}                   & 0.662 $\pm$ 0.017                          & 92.392 $\pm$ 11.353                      \\ \hline
+\multicolumn{1}{|c|}{7 (4113)}                   & 0.578 $\pm$ 0.010                          & 97.344 $\pm$ 13.705                      \\ \hline
+\multicolumn{1}{|c|}{8 (8119)}                   & 0.656 $\pm$ 0.005                          & 326.387 $\pm$ 37.659                     \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}
+ \fontsize{4}{5.332}\selectfont
+\centerline{
+\def\arraystretch{1.5}
+\begin{tabular}{c|c|c|c|c|}
+\cline{2-5}
+                                          & \multicolumn{4}{c|}{\textbf{Non-conditional}}                                                                                                                                       \\ \cline{2-5} 
+                                          & \multicolumn{2}{c|}{\textbf{If branch}}                                                  & \multicolumn{2}{c|}{\textbf{Else branch}}                                                \\ \hline
+\multicolumn{1}{|c|}{\textbf{Set (size)}} & \multicolumn{1}{c|}{\textbf{Avg. fitness}} & \multicolumn{1}{c|}{\textbf{Avg. time (s)}} & \multicolumn{1}{c|}{\textbf{Avg. fitness}} & \multicolumn{1}{c|}{\textbf{Avg. time (s)}} \\ \hline
+\multicolumn{1}{|c|}{1 (158)}             & \multicolumn{1}{c|}{\cellcolor{blue!20} 0.508 $\pm$ 0.000}     & \multicolumn{1}{c|}{\cellcolor{red!20} 0.563 $\pm$ 0.144}      & \multicolumn{1}{c|}{\cellcolor{blue!20} 0.588 $\pm$ 0.037}     & \multicolumn{1}{c|}{\cellcolor{red!20} 0.718 $\pm$ 0.079}      \\ \hline
+\multicolumn{1}{|c|}{2 (558)}             & \multicolumn{1}{c|}{0.588 $\pm$ 0.084}     & \multicolumn{1}{c|}{1.490 $\pm$ 0.526}      & \multicolumn{1}{c|}{0.694 $\pm$ 0.016}     & \multicolumn{1}{c|}{1.527 $\pm$ 0.194}      \\ \hline
+\multicolumn{1}{|c|}{3 (604)}             & 0.365 $\pm$ 0.000                          & 4.387 $\pm$ 0.768                           & 0.788 $\pm$ 0.000                          & 7.099 $\pm$ 0.906                           \\ \hline
+\multicolumn{1}{|c|}{4 (1041)}            & 0.689 $\pm$ 0.064                          & 4.510 $\pm$ 1.177                           & 0.741 $\pm$ 0.429                          & 3.568 $\pm$ 0.429                           \\ \hline
+\multicolumn{1}{|c|}{5 (1090)}            & 0.446 $\pm$ 0.000                          & 5.726 $\pm$ 0.755                           & 0.688 $\pm$ 0.011                          & 6.491 $\pm$ 0.743                           \\ \hline
+\multicolumn{1}{|c|}{6 (2198)}            & 0.412 $\pm$ 0.063                          & 58.295 $\pm$ 12.765                         & 0.645 $\pm$ 0.024                          & 52.308 $\pm$ 5.785                          \\ \hline
+\multicolumn{1}{|c|}{7 (4113)}            & 0.363 $\pm$ 0.000                          & 44.838 $\pm$ 5.926                          & 0.688 $\pm$ 0.032                          & 51.725 $\pm$ 4.260                          \\ \hline
+\multicolumn{1}{|c|}{8 (8119)}            & 0.474 $\pm$ 0.000                          & 106.119 $\pm$ 7.152                         & 0.766 $\pm$ 0.002                          & 186.896 $\pm$ 20.008                        \\ \hline
+\end{tabular}
+}
+\end{table}
+
+
 \end{frame}
 
 %------------------------------------------------
@@ -299,14 +536,16 @@ This statement requires citation \cite{p1}.
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
-\end{thebibliography}
-}
+\frametitle{Conclusions}
+Novel approach addresses three composition dimensions simultaneously (fully functional, contain branches, quality-optimised).
+
+\begin{itemize}
+\item Solutions found with similar performance as non-branching techniques.
+\end{itemize}
+
+\vfill
+
+\textbf{Future work:} More than two branches, more complex branching conditions, analysis of convergence behaviour.
 \end{frame}
 
 %------------------------------------------------
