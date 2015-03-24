@@ -15,8 +15,8 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
-\documentclass[xcolor={table}]{beamer}
-%\documentclass[notes=only]{beamer} % Use this option to generate note slides
+%\documentclass[xcolor={table}]{beamer}
+\documentclass[notes=only,xcolor={table}]{beamer} % Use this option to generate note slides
 
 \usepackage{algorithm2e}
 
@@ -174,6 +174,14 @@ The combination of Web services to achieve a more complex task. Fully automated 
  \end{columns}
 \end{frame}
 
+\note{
+\begin{itemize}
+ \item In certain cases, we might need alternative paths in a composition, depending on the runtime values produced.
+ \item For example, in the case of a service that models the purchase of a book, the customer might pay for the book in full or in installments, depending on their current balance.
+ \item So, once the balance is check, one of two different branches may be executed, leading to different outputs.
+\end{itemize}
+
+}
 
 %------------------------------------------------
 
@@ -190,7 +198,7 @@ The combination of Web services to achieve a more complex task. Fully automated 
 
 \note{
 \begin{itemize}
- \item The complexity of Web service composition lies in the number of different dimensions it must consider at the same time.
+ \item As we can see, the complexity of Web service composition lies in the number of different dimensions it must consider at the same time.
  \item In the first dimension, we must ensure that services have their inputs and outputs properly linked. For example, a service that produces a four-digit number should be able to feed its output to the input of a service that accepts a zip code, however a four-digit number should not be accepted as a city name.
  \item In the second dimension, we must consider conditions that lead to different execution paths. For example, if a city is located in New Zealand, we would like a wind-only forecast as opposed to a general one.
  \item In the third dimension, we must produce compositions with the best possible quality attributes. For example, we would like it to have the lowest possible execution time as well as the lowest possible financial cost.
@@ -430,6 +438,15 @@ $fitness_i = w_1(1 - A_i) + w_2(1 - R_i) + w_3T_i + w_4C_i$
 
 \end{frame}
 
+\note{
+\begin{itemize}
+ \item The fitness function is used to optimise the composition candidates according to their overall quality of service attributes. The values produced range from 0, in the best possible case, to 1, in the worst possible.
+ \item These attributes are combined into a single value by using a weighted sum, where the weights add up to 1. The individual QoS values are also normalised to remain between 0 and 1.
+ \item The different overall quality attributes are calculated differently depending on the constructs of the composition. For example, the execution time is the sum of individual service times in a sequential construct; it is the longest individual time in a parallel construct; it is a weighted sum of individual times, where the weights are probabilities, in a branching construct.
+\end{itemize}
+
+}
+
 %------------------------------------------------
 \section{Experiments}
 \subsection{}
@@ -462,6 +479,17 @@ Mutation probability  & 0.1 &                                         & \multico
 
 \end{frame}
 
+\note{
+\begin{itemize}
+\item The performance of the proposed approach was evaluated through a set of experiments.
+\item There were two big difficulties in conducting these experiments: firstly, there is a lack of existing datasets that support branching in the field; secondly, there are no other approaches that can be used for direct comparison (they have no branching and QoS optimisation simultaneously).
+\item Having these problems in mind, our decision was to create our own datasets, and to run experiments both for conditional tasks with two branches and for the branches separately.
+\item While definitive conclusions cannot be made by comparing the results with branching to those without branching, interesting patterns may nevertheless emerge.
+\item The parameters shown here were used for testing.
+\end{itemize}
+}
+
+
 %------------------------------------------------
 
 \begin{frame}
@@ -480,6 +508,13 @@ Modified from WSC2008.
 Tasks requiring branching were created.
 
 \end{frame}
+
+\note{
+  \begin{itemize}
+   \item The datasets were created by extending WSC2008, a well-known dataset in the field.
+  \end{itemize}
+
+}
 
 %------------------------------------------------
 
@@ -537,16 +572,20 @@ Tasks requiring branching were created.
 
 \begin{frame}
 \frametitle{Conclusions}
-Novel approach addresses three composition dimensions simultaneously (fully functional, contain branches, quality-optimised).
+Novel approach addresses {\color{blue}three composition dimensions} simultaneously (fully functional, contain branches, quality-optimised).
 
 \begin{itemize}
-\item Solutions found with similar performance as non-branching techniques.
+\item Solutions found with similar performance as non-branching technique.
 \end{itemize}
 
 \vfill
 
+\setbeamercolor{postit}{fg=black,bg=cyan!20}
+\begin{beamercolorbox}[sep=1em]{postit}
 \textbf{Future work:} More than two branches, more complex branching conditions, analysis of convergence behaviour.
+\end{beamercolorbox}
 \end{frame}
+
 
 %------------------------------------------------
 
@@ -556,6 +595,8 @@ Novel approach addresses three composition dimensions simultaneously (fully func
 \medskip
 \centerline{Questions\textcolor{red}{\textbf{?}}}
 \end{frame}
+
+\note{Thank you! Are there any questions?}
 
 %----------------------------------------------------------------------------------------
 

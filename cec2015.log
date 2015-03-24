@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (Web2C 2013) (format=pdflatex 2015.2.6)  24 MAR 2015 15:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (Web2C 2013) (format=pdflatex 2015.2.6)  24 MAR 2015 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -111,6 +111,12 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen126
 \Gm@dimlist=\toks15
 )
+
+Class beamer Warning: This option is obsolete. Use beamer option ``show only no
+tes'' instead. on input line 346.
+
+No auxiliary output files.
+
 (/usr/pkg/share/texmf-dist/tex/latex/base/size11.clo
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
@@ -798,8 +804,6 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@thisrulewidth=\dimen202
 )
 (./cec2015.aux)
-\openout1 = `cec2015.aux'.
-
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
 LaTeX Font Info:    ... okay on input line 105.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
@@ -900,9 +904,6 @@ LaTeX Info: Redefining \pageref on input line 105.
 LaTeX Info: Redefining \nameref on input line 105.
 
 (./cec2015.out) (./cec2015.out)
-\@outlinefile=\write5
-\openout5 = `cec2015.out'.
-
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 105.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
@@ -970,23 +971,41 @@ Dictionary: translator-numbers-dictionary, Language: English
 -dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (./cec2015.nav)
+[1
 
-LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 109.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-<currency_example.pdf, id=91, 293.22047pt x 72.27pt>
+
+
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<currency_example.pdf, id=58, 293.22047pt x 72.27pt>
 File: currency_example.pdf Graphic file (type pdf)
 
 <use currency_example.pdf>
 Package pdftex.def Info: currency_example.pdf used on input line 132.
 (pdftex.def)             Requested size: 199.16928pt x 49.0889pt.
- [2
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 141
+.
+LaTeX Font Info:    No file OMScmss.fd. on input line 141.
+
+
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 141.
+
+[2
+
+
+
+
+
+
+
+
 
  <./currency_example.pdf>]
-<fully_automated_example.pdf, id=123, 505.81471pt x 303.45872pt>
+<fully_automated_example.pdf, id=76, 505.81471pt x 303.45872pt>
 File: fully_automated_example.pdf Graphic file (type pdf)
 
 <use fully_automated_example.pdf>
@@ -994,8 +1013,11 @@ Package pdftex.def Info: fully_automated_example.pdf used on input line 150.
 (pdftex.def)             Requested size: 284.52756pt x 170.69974pt.
  [3
 
+
+
+
  <./fully_automated_example.pdf>]
-<motivation.pdf, id=159, 271.2007pt x 408.85248pt>
+<motivation.pdf, id=95, 271.2007pt x 408.85248pt>
 File: motivation.pdf Graphic file (type pdf)
  <use motivation.pdf>
 Package pdftex.def Info: motivation.pdf used on input line 175.
@@ -1011,193 +1033,259 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 175.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [4
 
+
+
+
  <./motivation.pdf>]
 [5
 
+
+
+
 ] [6
 
-] <tree.pdf, id=246, 460.72125pt x 373.80905pt>
+
+
+
+] <tree.pdf, id=129, 460.72125pt x 373.80905pt>
 File: tree.pdf Graphic file (type pdf)
  <use tree.pdf>
-Package pdftex.def Info: tree.pdf used on input line 262.
+Package pdftex.def Info: tree.pdf used on input line 270.
 (pdftex.def)             Requested size: 170.71652pt x 138.5068pt.
  [7
 
- <./tree.pdf>] <representation.pdf, id=284, 473.78256pt x 512.66531pt>
+
+
+
+ <./tree.pdf>] <representation.pdf, id=149, 473.78256pt x 512.66531pt>
 File: representation.pdf Graphic file (type pdf)
 
 <use representation.pdf>
-Package pdftex.def Info: representation.pdf used on input line 296.
+Package pdftex.def Info: representation.pdf used on input line 304.
 (pdftex.def)             Requested size: 184.9429pt x 200.11858pt.
  [8
 
+
+
+
+
+
+
+
+
  <./representation.pdf>]
-<algorithm_tree.pdf, id=316, 196.63461pt x 216.09483pt>
+<algorithm_tree.pdf, id=165, 196.63461pt x 216.09483pt>
 File: algorithm_tree.pdf Graphic file (type pdf)
 
 <use algorithm_tree.pdf>
-Package pdftex.def Info: algorithm_tree.pdf used on input line 363.
+Package pdftex.def Info: algorithm_tree.pdf used on input line 371.
 (pdftex.def)             Requested size: 113.81102pt x 125.07458pt.
  [9
 
+
+
+
  <./algorithm_tree.pdf>]
-<mutation.pdf, id=354, 251.77814pt x 290.73618pt>
+<mutation.pdf, id=186, 251.77814pt x 290.73618pt>
 File: mutation.pdf Graphic file (type pdf)
  <use mutation.pdf>
-Package pdftex.def Info: mutation.pdf used on input line 396.
+Package pdftex.def Info: mutation.pdf used on input line 404.
 (pdftex.def)             Requested size: 113.81102pt x 131.42009pt.
 
-Overfull \vbox (3.99988pt too high) detected at line 396
+Overfull \vbox (3.99988pt too high) detected at line 404
  []
 
-<crossover.pdf, id=355, 356.90842pt x 193.39754pt>
+<crossover.pdf, id=187, 356.90842pt x 193.39754pt>
 File: crossover.pdf Graphic file (type pdf)
  <use crossover.pdf>
-Package pdftex.def Info: crossover.pdf used on input line 396.
+Package pdftex.def Info: crossover.pdf used on input line 404.
 (pdftex.def)             Requested size: 170.71652pt x 92.50514pt.
 
-Underfull \vbox (badness 10000) detected at line 396
+Underfull \vbox (badness 10000) detected at line 404
  []
 
 [10
 
+
+
+
  <./mutation.pdf> <./crossover.pdf>]
-<sequence.pdf, id=403, 286.78392pt x 72.27pt>
+<sequence.pdf, id=218, 286.78392pt x 72.27pt>
 File: sequence.pdf Graphic file (type pdf)
  <use sequence.pdf>
-Package pdftex.def Info: sequence.pdf used on input line 431.
+Package pdftex.def Info: sequence.pdf used on input line 439.
 (pdftex.def)             Requested size: 113.81102pt x 28.68031pt.
 
-<parallel.pdf, id=404, 201.56555pt x 108.06624pt>
+<parallel.pdf, id=219, 201.56555pt x 108.06624pt>
 File: parallel.pdf Graphic file (type pdf)
  <use parallel.pdf>
-Package pdftex.def Info: parallel.pdf used on input line 431.
+Package pdftex.def Info: parallel.pdf used on input line 439.
 (pdftex.def)             Requested size: 76.82234pt x 41.1876pt.
 
-<conditional.pdf, id=405, 206.38354pt x 116.8365pt>
+<conditional.pdf, id=220, 206.38354pt x 116.8365pt>
 File: conditional.pdf Graphic file (type pdf)
  <use conditional.pdf>
-Package pdftex.def Info: conditional.pdf used on input line 431.
+Package pdftex.def Info: conditional.pdf used on input line 439.
 (pdftex.def)             Requested size: 76.82234pt x 43.4891pt.
 
 [11
 
+
+
+
  <./sequence.pdf> <./parallel.pdf> <./conditional.pdf>] [12
 
+
+
+
+
+
+
+
+
 ]
-<dataset_example.pdf, id=476, 537.2823pt x 96.05887pt>
+<dataset_example.pdf, id=257, 537.2823pt x 96.05887pt>
 File: dataset_example.pdf Graphic file (type pdf)
 
 <use dataset_example.pdf>
-Package pdftex.def Info: dataset_example.pdf used on input line 482.
+Package pdftex.def Info: dataset_example.pdf used on input line 510.
 (pdftex.def)             Requested size: 256.0748pt x 45.78526pt.
  [13
 
- <./dataset_example.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <4> on input line 531.
 
+
+
+ <./dataset_example.pdf>]
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
+(Font)              size <5> substituted on input line 567.
+
+LaTeX Font Info:    Calculating math sizes for size <4> on input line 567.
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <2.79999> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <2> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <2.79999> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <2> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <2.79999> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <2> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <4> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <2.79999> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <2> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/bx/n' in size <4> not available
-(Font)              size <5> substituted on input line 531.
+(Font)              size <5> substituted on input line 567.
 
 [14
 
+
+
+
 ] [15
+
+
+
+
+
+
+
+
 
 ] [16
 
+
+
+
 ]
-\tf@nav=\write6
-\openout6 = `cec2015.nav'.
-
-\tf@toc=\write7
-\openout7 = `cec2015.toc'.
-
-\tf@snm=\write8
-\openout8 = `cec2015.snm'.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 566.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 566.
- (./cec2015.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 566.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 566.
-Package rerunfilecheck Info: File `cec2015.out' has not changed.
-(rerunfilecheck)             Checksum: BF99E5B2C737A71697D8E91AA37EC20C;183.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 619.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 619.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 619.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 619.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 3.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 566.
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 619.
  ) 
 Here is how much of TeX's memory you used:
- 17286 strings out of 493945
- 316598 string characters out of 6159097
- 445961 words of memory out of 5000000
- 20031 multiletter control sequences out of 15000+600000
- 16778 words of font info for 65 fonts, out of 8000000 for 9000
+ 17243 strings out of 493945
+ 315761 string characters out of 6159097
+ 441382 words of memory out of 5000000
+ 20016 multiletter control sequences out of 15000+600000
+ 19144 words of font info for 74 fonts, out of 8000000 for 9000
  774 hyphenation exceptions out of 8191
- 55i,23n,55p,495b,781s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/pk
-g/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/pkg/share/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/pkg/share/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmss12.pfb></usr/pkg/share/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmss8.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmss9.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ssbx10.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pf
-b></usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/pk
-g/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/pkg/share/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/pkg/share/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy5.pfb></usr/pkg/share/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb>
-Output written on cec2015.pdf (16 pages, 1580128 bytes).
+ 55i,23n,53p,516b,781s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Navigation15} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Navigation12} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Navigation8} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Navigation2} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Navigation1} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Navigation16} has been referenced but does not exis
+t, replaced by a fixed one
+
+</usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/pkg/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/pkg/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/pkg/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmss12.pfb></usr/pkg/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmss8.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmss9.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
+bx10.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb>
+</usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/pkg/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/pkg/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/pkg/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy5.pfb></usr/pkg/share/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmtt10.pfb>
+Output written on cec2015.pdf (16 pages, 1581778 bytes).
 PDF statistics:
- 638 PDF objects out of 1000 (max. 8388607)
- 530 compressed objects within 6 object streams
- 41 named destinations out of 1000 (max. 500000)
+ 345 PDF objects out of 1000 (max. 8388607)
+ 210 compressed objects within 3 object streams
+ 15 named destinations out of 1000 (max. 500000)
  125 words of extra memory for PDF output out of 10000 (max. 10000000)
 
